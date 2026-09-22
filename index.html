@@ -1,41 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flashcard Quiz App</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Quote Generator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
-    <h1>📚 Flashcard Quiz App</h1>
-    <p class="subtitle">Learn, review and track your progress</p>
-
-    <div class="progress-box">
-      <span id="progressText">Card 1 of 5</span>
-      <div class="progress-bar"><div id="progressFill"></div></div>
-    </div>
-
-    <div class="card" id="flashcard">
-      <div class="label">QUESTION</div>
-      <div id="question">What is Java?</div>
-      <div class="answer hidden" id="answer">Java is a high-level, object-oriented programming language.</div>
-      <button class="show-btn" id="showBtn" onclick="showAnswer()">Show Answer</button>
-    </div>
-
-    <div class="navigation">
-      <button onclick="previousCard()">← Previous</button>
-      <button onclick="nextCard()">Next →</button>
-    </div>
-
-    <div class="manage">
-      <button onclick="addCard()">＋ Add</button>
-      <button onclick="editCard()">✎ Edit</button>
-      <button class="danger" onclick="deleteCard()">🗑 Delete</button>
-    </div>
-
-    <p id="message"></p>
-  </div>
-  <script src="script.js"></script>
+<main class="quote-card">
+<h1>Random Quote Generator</h1>
+<div class="quote-mark">“</div>
+<p id="quote">Click the button to get an inspiring quote.</p>
+<p id="author">— Unknown</p>
+<button id="newQuoteBtn">New Quote</button>
+</main>
+<script src="script.js"></script>
 </body>
 </html>

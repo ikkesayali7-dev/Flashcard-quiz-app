@@ -1,95 +1,25 @@
-let cards = [
-  { question: "What is Java?", answer: "Java is a high-level, object-oriented programming language." },
-  { question: "What is SQL?", answer: "SQL is used to store, retrieve and manage data in relational databases." },
-  { question: "What is HTML?", answer: "HTML is the standard markup language used to create web pages." },
-  { question: "What is CSS?", answer: "CSS is used to style and design HTML web pages." },
-  { question: "What is JavaScript?", answer: "JavaScript is a programming language used to add interactivity to web pages." }
+const quotes=[
+{text:"The future depends on what you do today.",author:"Mahatma Gandhi"},
+{text:"Success is not final, failure is not fatal.",author:"Winston Churchill"},
+{text:"Believe you can and you're halfway there.",author:"Theodore Roosevelt"},
+{text:"The only way to do great work is to love what you do.",author:"Steve Jobs"},
+{text:"It always seems impossible until it's done.",author:"Nelson Mandela"},
+{text:"Dream big and dare to fail.",author:"Norman Vincent Peale"},
+{text:"Do something today that your future self will thank you for.",author:"Unknown"},
+{text:"Small steps every day lead to big results.",author:"Unknown"},
+{text:"Don't watch the clock; do what it does. Keep going.",author:"Sam Levenson"},
+{text:"Great things are done by a series of small things brought together.",author:"Vincent van Gogh"}
 ];
-
-let current = 0;
-
-function renderCard() {
-  if (cards.length === 0) {
-    document.getElementById("question").textContent = "No flashcards available";
-    document.getElementById("answer").classList.add("hidden");
-    document.getElementById("showBtn").style.display = "none";
-    document.getElementById("progressText").textContent = "0 cards";
-    document.getElementById("progressFill").style.width = "0%";
-    return;
-  }
-
-  const card = cards[current];
-  document.getElementById("question").textContent = card.question;
-  document.getElementById("answer").textContent = card.answer;
-  document.getElementById("answer").classList.add("hidden");
-  document.getElementById("showBtn").textContent = "Show Answer";
-  document.getElementById("showBtn").style.display = "inline-block";
-
-  document.getElementById("progressText").textContent =
-    `Card ${current + 1} of ${cards.length}`;
-
-  document.getElementById("progressFill").style.width =
-    `${((current + 1) / cards.length) * 100}%`;
-
-  document.getElementById("message").textContent = "";
+const quoteElement=document.getElementById("quote");
+const authorElement=document.getElementById("author");
+const button=document.getElementById("newQuoteBtn");
+let lastIndex=-1;
+function showRandomQuote(){
+let i;
+do{i=Math.floor(Math.random()*quotes.length)}while(quotes.length>1&&i===lastIndex);
+lastIndex=i;
+quoteElement.textContent=quotes[i].text;
+authorElement.textContent="— "+quotes[i].author;
 }
-
-function showAnswer() {
-  const answer = document.getElementById("answer");
-  answer.classList.toggle("hidden");
-  document.getElementById("showBtn").textContent =
-    answer.classList.contains("hidden") ? "Show Answer" : "Hide Answer";
-}
-
-function nextCard() {
-  if (cards.length === 0) return;
-  current = (current + 1) % cards.length;
-  renderCard();
-}
-
-function previousCard() {
-  if (cards.length === 0) return;
-  current = (current - 1 + cards.length) % cards.length;
-  renderCard();
-}
-
-function addCard() {
-  const question = prompt("Enter the question:");
-  if (!question) return;
-
-  const answer = prompt("Enter the answer:");
-  if (!answer) return;
-
-  cards.push({ question, answer });
-  current = cards.length - 1;
-  renderCard();
-  document.getElementById("message").textContent = "Flashcard added successfully.";
-}
-
-function editCard() {
-  if (cards.length === 0) return;
-
-  const newQuestion = prompt("Edit question:", cards[current].question);
-  if (!newQuestion) return;
-
-  const newAnswer = prompt("Edit answer:", cards[current].answer);
-  if (!newAnswer) return;
-
-  cards[current] = { question: newQuestion, answer: newAnswer };
-  renderCard();
-  document.getElementById("message").textContent = "Flashcard updated successfully.";
-}
-
-function deleteCard() {
-  if (cards.length === 0) return;
-
-  const ok = confirm("Are you sure you want to delete this flashcard?");
-  if (!ok) return;
-
-  cards.splice(current, 1);
-  if (current >= cards.length) current = Math.max(0, cards.length - 1);
-  renderCard();
-  document.getElementById("message").textContent = "Flashcard deleted successfully.";
-}
-
-renderCard();
+button.addEventListener("click",showRandomQuote);
+showRandomQuote();
